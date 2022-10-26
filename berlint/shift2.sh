@@ -36,11 +36,16 @@ echo ";
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
 ;
-; -- START: Nomor 5 --
+; -- START: Nomor 6 --
 @                               IN      NS      operation.wise.c03.com.
-@                               IN      A       10.11.3.2
-; -- END: Nomor 5 --
+@                               IN      A       10.11.3.3
+www                             IN      CNAME   operation.wise.c03.com.
+; -- END: Nomor 6 --
 ;
+; -- START: Nomor 7 --
+strix                                     IN      A       10.11.3.3
+www.strix.operation.wise.c03.com.         IN      CNAME   eden.wise.c03.com.
+; -- END: Nomor 7 --
 " > /etc/bind/c03/operation.wise.c03.com
 // END: Nomor 5
 

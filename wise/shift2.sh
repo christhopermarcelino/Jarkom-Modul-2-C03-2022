@@ -1,4 +1,4 @@
-// Forward WISE ke Ostania supaya bisa terhubung ke internet
+// START: Nomor 1
 echo "
 options {
     directory \"/var/cache/bind\";
@@ -10,6 +10,7 @@ options {
     auth-nxdomain no;    # conform to RFC1035
     listen-on-v6 { any; };
 };" > /etc/bind/named.conf.options
+// END: Nomor 1
 
 // Menyiapkan zone
 echo "
@@ -42,21 +43,21 @@ echo ";
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
 ;
-; -- START: Nomor 1 --
+; -- START: Nomor 2 --
 @                               IN      NS      wise.c03.com.
 @                               IN      A       10.11.2.2
 www                             IN      CNAME   wise.c03.com.
-; -- END: Nomor 1 --
-;
-; -- START: Nomor 2 --
-eden                            IN      A       10.11.3.3
-www.eden.wise.c03.com.          IN      CNAME   eden.wise.c03.com.
 ; -- END: Nomor 2 --
 ;
-; -- START: Nomor 5 --
+; -- START: Nomor 3 --
+eden                            IN      A       10.11.3.3
+www.eden.wise.c03.com.          IN      CNAME   eden.wise.c03.com.
+; -- END: Nomor 3 --
+;
+; -- START: Nomor 4 --
 ns1                             IN      A       10.11.3.2
 operation                       IN      NS      ns1
-; -- END: Nomor 5 --
+; -- END: Nomor 4 --
 @       IN      AAAA    ::1
 " > /etc/bind/wise/wise.c03.com
 
