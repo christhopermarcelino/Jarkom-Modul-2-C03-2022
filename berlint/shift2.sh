@@ -44,7 +44,7 @@ www                             IN      CNAME   operation.wise.c03.com.
 ;
 ; -- START: Nomor 7 --
 strix                                     IN      A       10.11.3.3
-www.strix.operation.wise.c03.com.         IN      CNAME   eden.wise.c03.com.
+www.strix.operation.wise.c03.com.         IN      CNAME   strix.operation.wise.c03.com.
 ; -- END: Nomor 7 --
 " > /etc/bind/c03/operation.wise.c03.com
 // END: Nomor 5
