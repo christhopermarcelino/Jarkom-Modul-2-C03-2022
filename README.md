@@ -516,6 +516,18 @@ Untuk itu, perlu dibuat konfigurasi web server yang mengarah ke `/var/www/strix.
 </VirtualHost>
 ```
 Buat file yang serupa yaitu `/etc/apache2/sites-available/strix.operation.c03.com-15500.conf` dan ganti port yang atas menjadi 15500.  
+```
+<VirtualHost *:15500>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/strix.operation.c03.com
+        ServerName strix.operation.c03.com
+        ServerAlias www.strix.operation.c03.com
+
+        #LogLevel info ssl:warn
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
 Aktifkan kedua konfigurasi tersebut dengan a2ensite. Kemudian, menambahkan konfigurasi sebagai berikut di /etc/apache2/ports.conf
 ```
 Listen 15000
