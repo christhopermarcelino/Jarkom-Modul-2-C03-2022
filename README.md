@@ -503,6 +503,19 @@ Maka, ketika kita akses lynx ke `www.eden.wise.c03.com/js` akan diarahkan ke `ww
 Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 
 **Pembahasan:**
+Untuk itu, perlu dibuat konfigurasi web server untuk strix.operation.c03.com pada /etc/apache2/sites-available/strix.operation.c03.com.conf di Eden.
+```
+<VirtualHost *:150000>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/strix.operation.c03.com
+        ServerName strix.operation.c03.com
+        ServerAlias www.strix.operation.c03.com
+
+        #LogLevel info ssl:warn
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
 
 ## Soal 15
 **Deskripsi:**
