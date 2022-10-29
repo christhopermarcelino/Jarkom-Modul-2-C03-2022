@@ -563,3 +563,5 @@ Maka, ketika bisa mengakses dengan ada substring eden, misalnya `lynx http://ede
 
 ## Kendala
 - Pada soal 10, walaupun password yang kami temukan sudah benar, tapi flag tidak berhasil kami dapatkan karena decryption kami lakukan di WSL. Akhirnya, kami mencoba descryption di terminal linux dan flag berhasil didapatkan.
+- Waktu pengerjaan kurang
+- Terdapat perbedaan perilaku pada tiap anggota kami walau dengan konfigurasi yang sama, misalnya satu bisa mengakses `lynx wise.c03.com`, tapi yang lain tidak 
