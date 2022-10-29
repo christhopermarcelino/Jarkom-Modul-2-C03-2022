@@ -540,8 +540,8 @@ Kita perlu me-restart apache untuk menerapkan konfigurasi tersebut
 ```
 service apache2 restart
 ```
-Maka, pada saat mengakses `lynx 10.11.3.3` akan muncul
-
+Maka, pada saat mengakses `lynx 10.11.3.3` akan muncul laman sebagai berikut.
+![image](https://user-images.githubusercontent.com/34309557/198838541-8a2eaa58-1dc4-4ec1-b07a-fe987b4ef713.png)
 
 ## Soal 17
 **Deskripsi:**
