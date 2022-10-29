@@ -2,6 +2,7 @@
 
 Penyelesaian Soal Shift Modul 2 Jaringan Komputer 2022 <br>
 Kelompok C03
+- Aqil Ramadhan Hadiono - NRP 5025201261
 - Christhoper Marcelino Mamahit - NRP 5025201249
 - Zahra Fayyadiyati - NRP 5025201133
 
@@ -119,7 +120,7 @@ Supaya client dapat mengakses wise.c03.com dan www.wise.c03.com, dituliskan code
                          604800 )       ; Negative Cache TTL
 ;
 @                               IN      NS      wise.c03.com.
-@                               IN      A       10.11.2.2
+@                               IN      A       10.11.3.3
 www                             IN      CNAME   wise.c03.com.
 ```
 Selain itu, dibuat juga pengaturan zone sebagai berikut di /etc/bind/named.conf.local
@@ -132,6 +133,7 @@ zone \"wise.c03.com\" {
     file \"/etc/bind/wise/wise.c03.com\";
 };
 ```
+Terlihat bahwa IP yang tertera adalah 10.11.3.3, yakni IP Eden karena web server akan dijalankan di Eden.
 
 ## Soal 3
 **Deskripsi:**
@@ -237,23 +239,24 @@ Lalu, ditambahkan konfigurasi DNS pada /etc/bind/c03/operation.wise.c03.com
                         2419200         ; Expire
                          604800 )       ; Negative Cache TTL
 ;
-; -- START: Nomor 6 --
 @                               IN      NS      operation.wise.c03.com.
 @                               IN      A       10.11.3.3
 www                             IN      CNAME   operation.wise.c03.com.
-; -- END: Nomor 6 --
 ;
-; -- START: Nomor 7 --
-strix                                     IN      A       10.11.3.3
-www.strix.operation.wis
 ```
+Terlihat bahwa IP yang tertera adalah 10.11.3.3, yakni IP Eden sehingga sesuai dengan permintaan soal.
 
 ## Soal 7
 **Deskripsi:**
 Untuk informasi yang lebih spesifik mengenai Operation Strix, buatlah subdomain melalui Berlint dengan akses strix.operation.wise.yyy.com dengan alias www.strix.operation.wise.yyy.com yang mengarah ke Eden
 
 **Pembahasan:**
-
+Untuk itu, ditambahkan konfigurasi sebagai berikut di /etc/bind/c03/operation.wise.c03.com yang terletak di Berlint
+```
+strix                                     IN      A       10.11.3.3
+www.strix.operation.wise.c03.com.         IN      CNAME   strix.operation.wise.c03.com.
+```
+Terlihat bahwa IP yang tertera adalah 10.11.3.3, yakni IP Eden sehingga sesuai dengan permintaan soal.
 
 ## Soal 8
 **Deskripsi:**
