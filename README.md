@@ -16,13 +16,13 @@ Kelompok C03
 * [Soal 8](#soal-8)
 * [Soal 9](#soal-9)
 * [Soal 10](#soal-10)
-* [Soal 10](#soal-11)
-* [Soal 10](#soal-12)
-* [Soal 10](#soal-13)
-* [Soal 10](#soal-14)
-* [Soal 10](#soal-15)
-* [Soal 10](#soal-16)
-* [Soal 10](#soal-17)
+* [Soal 11](#soal-11)
+* [Soal 12](#soal-12)
+* [Soal 13](#soal-13)
+* [Soal 14](#soal-14)
+* [Soal 15](#soal-15)
+* [Soal 16](#soal-16)
+* [Soal 17](#soal-17)
 
 ## Soal 1
 **Deskripsi:**
