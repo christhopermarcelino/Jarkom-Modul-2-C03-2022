@@ -105,25 +105,100 @@ Semua node client (SSS dan Garden) memiliki `nameserver 10.11.2.2 nameserver 10.
 Untuk mempermudah mendapatkan informasi mengenai misi dari Handler, bantulah Loid membuat website utama dengan akses wise.yyy.com dengan alias www.wise.yyy.com pada folder wise
 
 **Pembahasan:**
+Supaya client dapat mengakses wise.c03.com dan www.wise.c03.com, dituliskan code sebagai berikut di /etc/bind/wise/wise.c03.com.
+```
+;
+; BIND data file for local loopback interface
+;
+
+\$TTL    604800
+@       IN      SOA     wise.c03.com. root.wise.c03.com. (
+                       20221024         ; Serial 
+                         604800         ; Refresh
+                          86400         ; Retry 
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@                               IN      NS      wise.c03.com.
+@                               IN      A       10.11.2.2
+www                             IN      CNAME   wise.c03.com.
+```
+Selain itu, dibuat juga pengaturan zone sebagai berikut di /etc/bind/named.conf.local
+```
+zone \"wise.c03.com\" {
+    type master;
+    notify yes;
+    also-notify { 10.11.3.2; };
+    allow-transfer { 10.11.3.2; };
+    file \"/etc/bind/wise/wise.c03.com\";
+};
+```
 
 ## Soal 3
 **Deskripsi:**
 Setelah itu ia juga ingin membuat subdomain eden.wise.yyy.com dengan alias www.eden.wise.yyy.com yang diatur DNS-nya di WISE dan mengarah ke Eden 
 
 **Pembahasan:**
+Untuk itu, ditambahkan subdomain di /etc/bind/wise/wise.c03.com dengan menambahkan code seperti sebagai berikut.
+```
+eden                            IN      A       10.11.3.3
+www.eden.wise.c03.com.          IN      CNAME   eden.wise.c03.com.
+```
 
 ## Soal 4
 **Deskripsi:**
 Buat juga reverse domain untuk domain utama
 
 **Pembahasan:**
+Caranya adalah dengan membuat konfigurasi di /etc/bind/named.conf.options terlebih dahulu.
+```
+options {
+    directory \"/var/cache/bind\";
+    allow-query{any;};
 
+    auth-nxdomain no;    # conform to RFC1035
+    listen-on-v6 { any; };
+};
+```
+Setelah itu, membuat zone di /etc/bind/named.conf.local
+```
+zone \"2.11.10.in-addr.arpa\" {
+    type master;
+    file \"/etc/bind/wise/2.11.10.in-addr.arpa\";
+};
+```
+Lalu, membuat konfigurasi DNS di /etc/bind/wise/2.11.10.in-addr.arpa
+```
+;
+; BIND data file for local loopback interface
+;
+\$TTL    604800
+@       IN      SOA     wise.c03.com. root.wise.c03.com. (
+                     2022100601         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+2.11.10.in-addr.arpa.   IN      NS      wise.c03.com.
+2                       IN      PTR     wise.c03.com.   ; Byte ke-4
+```
 
 ## Soal 5
 **Deskripsi:**
 Agar dapat tetap dihubungi jika server WISE bermasalah, buatlah juga Berlint sebagai DNS Slave untuk domain utama 
 
 **Pembahasan:**
+Supaya Berlint dapat menjadi slave dari WISE, diperlukan konfigurasi zone pada Berlint
+```
+zone \"wise.c03.com\" {
+    type slave;
+    masters { 10.11.2.2; };
+    file \"/var/lib/bind/wise.c03.com\";
+};
+```
+Pada code tersebut, terlihat bahwa Berlint adalah slave dari IP 10.11.2.2 yang mana IP tersebut adalah IP dari WISE
+
 
 ## Soal 6
 **Deskripsi:**
