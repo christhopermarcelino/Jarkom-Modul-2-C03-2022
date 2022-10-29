@@ -313,7 +313,7 @@ Konfigurasi pada server selesai, maka domain `wise.c03.com` sudah bisa diakses m
 ```
 lynx wise.c03.com
 ```
-![8](https://user-images.githubusercontent.com/78243059/198834618-bd99b244-d9dd-410d-a5ef-e5131f8a4e2a.jpg)
+![image](https://user-images.githubusercontent.com/34309557/198837026-db814e74-9e56-46e0-8385-8ebdaf772a17.png)
 
   
 ## Soal 9
