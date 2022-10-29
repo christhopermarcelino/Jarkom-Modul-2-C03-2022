@@ -225,6 +225,29 @@ zone \"operation.wise.c03.com\" {
     file \"/etc/bind/c03/operation.wise.c03.com\";
 };
 ```
+Lalu, ditambahkan konfigurasi DNS pada /etc/bind/c03/operation.wise.c03.com
+```
+;
+; BIND data file for local loopback interface
+;
+\$TTL    604800
+@       IN      SOA     operation.wise.c03.com. root.operation.wise.c03.com. (
+                       20221024         ; Serial 
+                         604800         ; Refresh
+                          86400         ; Retry 
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+; -- START: Nomor 6 --
+@                               IN      NS      operation.wise.c03.com.
+@                               IN      A       10.11.3.3
+www                             IN      CNAME   operation.wise.c03.com.
+; -- END: Nomor 6 --
+;
+; -- START: Nomor 7 --
+strix                                     IN      A       10.11.3.3
+www.strix.operation.wis
+```
 
 ## Soal 7
 **Deskripsi:**
