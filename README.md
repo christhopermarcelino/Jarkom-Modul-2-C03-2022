@@ -30,6 +30,75 @@ Kelompok C03
 Terdapat 2 Client yaitu SSS, dan Garden. Semua node terhubung pada router Ostania, sehingga dapat mengakses internet 
 
 **Pembahasan:**
+Berikut ini adalah network configuration dari setiap node.
+
+Ostania
+```
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+	address 10.11.1.1
+	netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+	address 10.11.2.1
+	netmask 255.255.255.0
+
+auto eth3
+iface eth3 inet static
+	address 10.11.3.1
+	netmask 255.255.255.0
+```
+
+SSS
+```
+auto eth0
+iface eth0 inet static
+	address 10.11.1.2
+	netmask 255.255.255.0
+	gateway 10.11.1.1
+```
+
+Garden
+```
+auto eth0
+iface eth0 inet static
+	address 10.11.1.3
+	netmask 255.255.255.0
+	gateway 10.11.1.1
+```
+
+WISE 
+```
+auto eth0
+iface eth0 inet static
+	address 10.11.2.2
+	netmask 255.255.255.0
+	gateway 10.11.2.1
+```
+
+Berlint
+```
+auto eth0
+iface eth0 inet static
+	address 10.11.3.2
+	netmask 255.255.255.0
+	gateway 10.11.3.1
+```
+
+Eden
+```
+auto eth0
+iface eth0 inet static
+	address 10.11.3.3
+	netmask 255.255.255.0
+	gateway 10.11.3.1
+```
+
+Semua node client (SSS dan Garden) memiliki `nameserver 10.11.2.2 nameserver 10.11.2.3` sementara node lainnya memiliki `nameserver 192.168.122.1`
 
 ## Soal 2
 **Deskripsi:**
