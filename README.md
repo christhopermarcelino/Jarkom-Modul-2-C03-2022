@@ -537,6 +537,10 @@ Karena ada domain lain selain `wise.c03.com` di web server, yaitu `eden.wise.c03
 ```
 Redirect 301 / http://www.wise.c03.com/
 ```
+Kita perlu me-restart apache untuk menerapkan konfigurasi tersebut
+```
+service apache2 restart
+```
 Maka, pada saat mengakses `lynx 10.11.3.3` akan muncul
 
 
