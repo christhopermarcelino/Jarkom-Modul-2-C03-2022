@@ -23,6 +23,7 @@ echo '
         DocumentRoot /var/www/eden.wise.c03.com
         ServerName eden.wise.c03.com
         ServerAlias www.eden.wise.c03.com
+        Alias "/js" "/var/www/eden.wise.c03.com/public/js"
         <Directory /var/www/eden.wise.c03.com/public>
                 Options +Indexes
         </Directory>
