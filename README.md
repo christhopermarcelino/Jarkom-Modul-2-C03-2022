@@ -505,7 +505,7 @@ Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan por
 **Pembahasan:**
 Untuk itu, perlu dibuat konfigurasi web server untuk strix.operation.c03.com pada /etc/apache2/sites-available/strix.operation.c03.com.conf di Eden.
 ```
-<VirtualHost *:150000>
+<VirtualHost *:15000>
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/strix.operation.c03.com
         ServerName strix.operation.c03.com
@@ -515,6 +515,11 @@ Untuk itu, perlu dibuat konfigurasi web server untuk strix.operation.c03.com pad
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+```
+Kemudian, menambahkan konfigurasi sebagai berikut di /etc/apache2/ports.conf
+```
+Listen 15000
+Listen 15500
 ```
 
 ## Soal 15
