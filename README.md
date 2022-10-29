@@ -502,7 +502,7 @@ Maka, ketika kita akses lynx ke `www.eden.wise.c03.com/js` akan diarahkan ke `ww
 Loid meminta agar www.strix.operation.wise.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
 
 **Pembahasan:**
-Untuk itu, perlu dibuat konfigurasi web server untuk strix.operation.c03.com pada /etc/apache2/sites-available/strix.operation.c03.com.conf di Eden.
+Untuk itu, perlu dibuat konfigurasi web server yang mengarah ke `/var/www/strix.operation.c03.com` pada `/etc/apache2/sites-available/strix.operation.c03.com-15000.conf` di Eden.
 ```
 <VirtualHost *:15000>
         ServerAdmin webmaster@localhost
@@ -515,17 +515,40 @@ Untuk itu, perlu dibuat konfigurasi web server untuk strix.operation.c03.com pad
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-Kemudian, menambahkan konfigurasi sebagai berikut di /etc/apache2/ports.conf
+Buat file yang serupa yaitu `/etc/apache2/sites-available/strix.operation.c03.com-15500.conf` dan ganti port yang atas menjadi 15500.  
+Aktifkan kedua konfigurasi tersebut dengan a2ensite. Kemudian, menambahkan konfigurasi sebagai berikut di /etc/apache2/ports.conf
 ```
 Listen 15000
 Listen 15500
 ```
+Maka, dengan mengakses `lynx strix.operation.wise.c03.com:15000` atau `lynx strix.operation.wise.c03.com:15500`, akan ditampilkan sebagai berikut
+![image](https://user-images.githubusercontent.com/78243059/198840440-cde46ed8-661f-4b95-a075-58d2ee145fe2.png)
+
 
 ## Soal 15
 **Deskripsi:**
 dengan autentikasi username Twilight dan password opStrix dan file di /var/www/strix.operation.wise.yyy
 
-**Pembahasan:**
+**Pembahasan:**  
+Buat password pada apache2 di web server dengan command
+```
+htpasswd -b -c /etc/apache2/.htpasswd Twilight opStrix
+```
+Lalu tambahkan konfigurasi autentikasi `/etc/apache2/sites-available/strix.operation.wise.c03.com.conf`
+```
+<Directory "/var/www/strix.operation.wise.c03.com">
+	AuthType Basic
+	AuthName "Restricted Content"
+        AuthuserFile /etc/apache2/.htpasswd
+        Require valid-user
+</Directory>
+```
+Maka, ketika kita akses `lynx strix.operation.wise.c03.com`, sistem akan meminta username dan password sebagai berikut
+![image](https://user-images.githubusercontent.com/78243059/198839830-c72152bc-e335-4b02-ba67-91afdb361008.png)
+![image](https://user-images.githubusercontent.com/78243059/198839865-5646dd97-3135-43af-80a4-c0a6c8904a51.png)
+![image](https://user-images.githubusercontent.com/78243059/198839888-ab2e1744-6ef9-4346-9f52-7d2364bd2cb4.png)
+![image](https://user-images.githubusercontent.com/78243059/198839896-6696b41d-7335-4904-8cbb-5ef9749a8d95.png)
+
 
 ## Soal 16
 **Deskripsi:**
