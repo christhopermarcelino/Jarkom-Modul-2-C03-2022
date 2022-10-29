@@ -532,7 +532,13 @@ dengan autentikasi username Twilight dan password opStrix dan file di /var/www/s
 **Deskripsi:**
 dan setiap kali mengakses IP Eden akan dialihkan secara otomatis ke www.wise.yyy.com
 
-**Pembahasan:**
+**Pembahasan:**  
+Karena ada domain lain selain `wise.c03.com` di web server, yaitu `eden.wise.c03.com`, maka kami menambahkan Redirect pada `/etc/apache2/sites-available/eden.wise.c03.com`.
+```
+Redirect 301 / http://www.wise.c03.com/
+```
+Maka, pada saat mengakses `lynx 10.11.3.3` akan muncul
+
 
 ## Soal 17
 **Deskripsi:**
