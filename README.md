@@ -197,14 +197,34 @@ zone \"wise.c03.com\" {
     file \"/var/lib/bind/wise.c03.com\";
 };
 ```
-Pada code tersebut, terlihat bahwa Berlint adalah slave dari IP 10.11.2.2 yang mana IP tersebut adalah IP dari WISE
+Pada code tersebut, terlihat bahwa Berlint adalah slave dari IP 10.11.2.2 yang mana IP tersebut adalah IP dari WISE. Selain itu, ditambahkan pula konfigurasi sebagai berikut di /etc/bind/named.conf.options
+```
+options {
+    directory \"/var/cache/bind\";
+    allow-query{any;};
 
+    auth-nxdomain no;    # conform to RFC1035
+    listen-on-v6 { any; };
+};
+```
 
 ## Soal 6
 **Deskripsi:**
 Karena banyak informasi dari Handler, buatlah subdomain yang khusus untuk operation yaitu operation.wise.yyy.com dengan alias www.operation.wise.yyy.com yang didelegasikan dari WISE ke Berlint dengan IP menuju ke Eden dalam folder operation
 
 **Pembahasan:**
+Untuk memenuhi deskripsi tersebut, ditambahkan konfigurasi delegasi subdomain pada /etc/bind/wise/wise.c03.com.
+```
+ns1                             IN      A       10.11.3.2
+operation                       IN      NS      ns1
+```
+Setelah itu, dibuat konfigurasi zone di Berlint di /etc/bind/named.conf.local
+```
+zone \"operation.wise.c03.com\" {
+    type master;
+    file \"/etc/bind/c03/operation.wise.c03.com\";
+};
+```
 
 ## Soal 7
 **Deskripsi:**
