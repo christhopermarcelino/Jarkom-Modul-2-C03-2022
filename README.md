@@ -322,7 +322,7 @@ lynx wise.c03.com
 Setelah itu, Loid juga membutuhkan agar url www.wise.yyy.com/index.php/home dapat menjadi menjadi www.wise.yyy.com/home
 
 **Pembahasan:**  
-Kami menggunakan alias `Alias "/index.php/home" "/var/www/wise.c03.com/home"` yang ditammbahkan ke `/etc/apache2/sites-available/wise.c03.com.conf` untuk me-redirect akses file suatu request.  
+Kami menggunakan alias `Alias "/index.php/home" "/var/www/wise.c03.com/index.php"` dan `Alias "/home" "/var/www/wise.c03.com/index.php"` yang ditammbahkan ke `/etc/apache2/sites-available/wise.c03.com.conf` untuk me-redirect akses file suatu request.  
 ```
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
@@ -330,14 +330,17 @@ Kami menggunakan alias `Alias "/index.php/home" "/var/www/wise.c03.com/home"` ya
         ServerName wise.c03.com
         ServerAlias www.wise.c03.com
 
-        Alias "/index.php/home" "/var/www/wise.c03.com/home"
+        Alias "/index.php/home" "/var/www/wise.c03.com/index.php"
+        Alias "/home" "/var/www/wise.c03.com/index.php"
 
         #LogLevel info ssl:warn
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-Maka, saat ada request ke `www.wise.c03.com/index.php/home`, akan dikembalikan file index.php di `/var/www/wise.c03.com/home`.
+Maka, saat ada request ke `www.wise.c03.com/index.php/home`, akan dikembalikan file index.php di `/var/www/wise.c03.com/index.php`.
+![image](https://user-images.githubusercontent.com/34309557/198837026-db814e74-9e56-46e0-8385-8ebdaf772a17.png)
+Laman tersebut akan muncul apabila melakukan `lynx www.wise.c03.com`, `lynx wise.c03.com`, `lynx www.wise.c03.com/home` ataupun `lynx www.wise.c03.com/index.php/home` pada client.
 
 ## Soal 10
 **Deskripsi:**
