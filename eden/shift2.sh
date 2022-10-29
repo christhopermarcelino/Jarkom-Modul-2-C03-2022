@@ -6,7 +6,10 @@ echo '
         DocumentRoot /var/www/wise.c03.com
         ServerName wise.c03.com
         ServerAlias www.wise.c03.com
-        Alias "/index.php/home" "/var/www/wise.c03.com/home"
+
+        Alias "/index.php/home" "/var/www/wise.c03.com/index.php"
+        Alias "/home" "/var/www/wise.c03.com/index.php"
+
         #LogLevel info ssl:warn
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -32,14 +35,16 @@ echo '
 </VirtualHost>' > /etc/apache2/sites-available/eden.wise.c03.com.conf
 
 mkdir /var/www/wise.c03.com
-touch /var/www/wise.c03.com/index.php
-touch /var/www/wise.c03.com/home
+cd /var/www/wise.c03.com
 
-echo '
-<?php
-        echo "File index.php EDEN";' > /var/www/wise.c03.com/index.php
+wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1S0XhL9ViYN7TyCj2W66BNEXQD2AAAw2e' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1S0XhL9ViYN7TyCj2W66BNEXQD2AAAw2e" -O /var/www/wise.c03.com/a && rm -rf /tmp/cookies.txt
+unzip a
+mv /var/www/wise.c03.com/wise/index.php /var/www/wise.c03.com
+mv /var/www/wise.c03.com/wise/home.html /var/www/wise.c03.com
+mv /var/www/wise.c03.com/wise/anya.jpg /var/www/wise.c03.com
 
-echo 'File home EDEN' > /var/www/wise.c03.com/home
+rm -r wise
+rm a
 
 mkdir /var/www/eden.wise.c03.com
 

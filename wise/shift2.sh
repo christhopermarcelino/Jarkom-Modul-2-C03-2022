@@ -2,9 +2,6 @@
 echo "
 options {
     directory \"/var/cache/bind\";
-    forwarders {
-        192.168.122.1;
-    };
     allow-query{any;};
 
     auth-nxdomain no;    # conform to RFC1035
@@ -80,3 +77,13 @@ echo ";
 // END: Nomor 3
 
 service bind9 restart
+
+echo "
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>" > /etc/apache2/sites-available/wise.c03.com.conf
