@@ -42,7 +42,7 @@ echo ";
 ;
 ; -- START: Nomor 2 --
 @                               IN      NS      wise.c03.com.
-@                               IN      A       10.11.2.2
+@                               IN      A       10.11.3.3
 www                             IN      CNAME   wise.c03.com.
 ; -- END: Nomor 2 --
 ;
