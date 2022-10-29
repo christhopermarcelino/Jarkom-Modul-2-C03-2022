@@ -538,7 +538,28 @@ dan setiap kali mengakses IP Eden akan dialihkan secara otomatis ke www.wise.yyy
 **Deskripsi:**
 Karena website www.eden.wise.yyy.com semakin banyak pengunjung dan banyak modifikasi sehingga banyak gambar-gambar yang random, maka Loid ingin mengubah request gambar yang memiliki substring “eden” akan diarahkan menuju eden.png.
 
-**Pembahasan:**
+**Pembahasan:**  
+Kami menambah konfigurasi .htaccess pada `/var/www/eden.wise.c03.com`
+```
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_URI} !\beden.png\b
+RewriteRule eden http://eden.wise.c03.com/public/images/eden.png$1 [L,R=301]
+```
+Lalu menambahkan aktivasi .htaccess pada `/etc/apache2/sites-available/eden.wise.c03.com`
+```
+<Directory /var/www/eden.wise.c03.com>
+	AllowOverride All
+</Directory>
+```
+Lalu, Apache perlu di-restart
+```
+service apache2 restart
+```
+Maka, ketika bisa mengakses dengan ada substring eden, misalnya `lynx http://eden.wise.c03.com/qweedenqwe`, akan diarahkan ke `http://eden.wise.c03.com/public/images/eden.png`
+![image](https://user-images.githubusercontent.com/78243059/198837882-a8062155-710c-482d-b856-ee5b36305df7.png)
+
+![image](https://user-images.githubusercontent.com/78243059/198837854-7939e3cc-3bbd-4cc3-92ac-e3749633b18e.png)
 
 ## Kendala
 - Pada soal 10, walaupun password yang kami temukan sudah benar, tapi flag tidak berhasil kami dapatkan karena decryption kami lakukan di WSL. Akhirnya, kami mencoba descryption di terminal linux dan flag berhasil didapatkan.
